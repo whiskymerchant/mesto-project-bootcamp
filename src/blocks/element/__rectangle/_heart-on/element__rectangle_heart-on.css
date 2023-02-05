@@ -1,0 +1,8 @@
+.element__rectangle_heart-on {
+  background-image: url(../../../../images/heart-filled.svg);
+ }
+
+ .element__rectangle_heart:hover {
+  opacity: 0.6;
+  cursor: pointer;
+ }

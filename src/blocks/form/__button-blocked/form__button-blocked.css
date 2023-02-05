@@ -1,0 +1,6 @@
+.form__button-blocked {
+  border: 1px solid #E5E5E5;
+  border-radius: 2px;
+  background: #fff;
+  color: #E5E5E5;
+}

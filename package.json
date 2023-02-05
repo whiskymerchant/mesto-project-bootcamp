@@ -1,0 +1,41 @@
+{
+  "name": "mesto-project-bootcamp",
+  "version": "1.0.0",
+  "description": "Данный [проект](https://whiskymerchant.github.io/mesto-project-bootcamp/) написан от лица самого путешествующего в мире кота, Скота. Это не просто кот, а кот-миротворец. Бебер (см. Луи-Фердинанда Селина) конца 2022 года. \r По странам, терпящим его присутствие, он несет желчь, депрессию и голубя мира. Скот уже прошел из Санкт-Петербурга в Москву, Ростов, Краснодар. Переплыл \r Черное Море на надувном матрасе Intex, прошел из Стамбула в Смирну, сел на паром до Лесбоса, где пока решил остаться на пару недель. Хвала Аллаху, на островах\r Эгейского моря любят котов (см. легенду о кошке Муиззе).",
+  "main": "script.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whiskymerchant/mesto-project-bootcamp.git"
+  },
+  "author": "Anton Plekhov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/whiskymerchant/mesto-project-bootcamp/issues"
+  },
+  "homepage": "https://github.com/whiskymerchant/mesto-project-bootcamp#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.13",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "cssnano": "^5.1.14",
+    "gh-pages": "^5.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "postcss-loader": "^7.0.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "core-js": "^3.27.2",
+    "mini-css-extract-plugin": "^2.7.2"
+  }
+}

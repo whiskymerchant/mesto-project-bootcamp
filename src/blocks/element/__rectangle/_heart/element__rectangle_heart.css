@@ -1,0 +1,17 @@
+.element__rectangle_heart {
+  height: 19px;
+  z-index: 2;
+  background-image: url(../../../../images/heart.svg);
+  background-repeat: no-repeat;
+  height: 19px;
+  width: 22px;
+  border: 0;
+  background-color: #fff;
+  transition: opacity linear 0.25s;
+  text-align: center;
+ }
+
+ .element__rectangle_heart:hover {
+  opacity: 0.6;
+  cursor: pointer;
+ }
