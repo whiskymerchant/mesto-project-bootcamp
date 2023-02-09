@@ -1,8 +1,7 @@
 
-import { openPopup, closePopup, toggleLike, handleFormSubmit, setEventListener } from "./util.js";
-import { runImagePopup } from "./modal.js";
+import { openPopup, closePopup, runImagePopup } from "./modal.js";
 import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector} from './consts.js';
-import {addCardManually, createCard} from "./card.js";
+import {addCardManually, createCard, toggleLike} from "./card.js";
 
 
 
@@ -13,7 +12,7 @@ function addError(inputElement, errorElement, config) {
 
 function hideError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
-  errorElement.textContent = 'All is fine';
+  errorElement.textContent = '';
 }
 
 function toggleButtonState(buttonElement, isActive, config) {
@@ -36,8 +35,6 @@ function checkInputValidity(inputElement, formElement, config) {
   else {
     hideError(inputElement, errorElement, config);
   }
-
-  errorElement.textContent = inputElement.validationMessage;
 }
 
 function enableValidation(config){
@@ -48,6 +45,20 @@ function enableValidation(config){
   })
 }
 
+function setEventListener(formElement, config){
+  const inputList = formElement.querySelectorAll(config.inputSelector);
+  const submitButtonElement = formElement.querySelector(config.submitButtonSelector);
+
+  toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
+      checkInputValidity(inputElement, formElement, config);
+    })
+  })
+}
+
 
 
 export {
@@ -55,5 +66,6 @@ export {
   checkInputValidity, 
   addError,
   hideError,
-  enableValidation
+  enableValidation,
+  setEventListener
 };

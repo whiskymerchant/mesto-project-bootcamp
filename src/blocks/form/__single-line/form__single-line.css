@@ -1,0 +1,19 @@
+.form__single-line {
+  width: 430px;
+  height: 272px;
+  background: #fff;
+  border: 0;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding-top: 37px;
+  z-index: 3;
+  opacity: 1;
+}
+
+@media (max-width: 580px) {
+  .form__single-line {
+    width: 282px;
+    height: 322px;
+  }
+  
+}

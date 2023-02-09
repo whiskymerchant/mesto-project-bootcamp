@@ -1,3 +1,4 @@
+
 const config = {
   url: 'https://mesto.nomoreparties.co',
   cohort: "wbf-cohort-5",
@@ -46,12 +47,11 @@ function loadNewCard(body){
     .then(dressResponse)
 }
 
-// непонятно куда отправлять аватар
 function editUserIcon(avatar){
   return fetch(`${config.url}/v1/${config.cohort}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
-    body: JSON.stringify(avatar)
+    body: JSON.stringify({avatar: avatar})
   })
     .then(dressResponse)
 }
@@ -64,6 +64,16 @@ function deleteCard(cardId){
   })
     .then(dressResponse)
 }
+
+function updateLike(cardId, liked){
+  return fetch(`${config.url}/v1/${config.cohort}/cards/likes/${cardId}`, {
+    method: liked ? "DELETE" : "PUT",
+    headers: config.headers,
+})
+    .then(dressResponse)
+}
+
+
 
 
 // loadNewCard({
@@ -80,4 +90,4 @@ function deleteCard(cardId){
 
 
 
-export { getUserData, dressResponse, getAllCards, profileInfoLoad, loadNewCard, editUserIcon, deleteCard };
+export { getUserData, dressResponse, getAllCards, profileInfoLoad, loadNewCard, editUserIcon, deleteCard, updateLike };

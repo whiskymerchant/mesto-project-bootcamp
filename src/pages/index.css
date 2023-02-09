@@ -31,7 +31,6 @@
 
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__container/form__container.css);
-@import url(../blocks/form/__contact-info/form__contact-info.css);
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__save-button/form__save-button.css);
@@ -41,6 +40,7 @@
 @import url(../blocks/form/__validation-text-upper/form__validation-text-upper.css);
 @import url(../blocks/form/__validation-text-lower/form__validation-text-lower.css);
 @import url(../blocks/form/__item/_last/form__item_last.css);
+@import url(../blocks/form/__single-line/form__single-line.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__big-pic-template/popup__big-pic-template.css);

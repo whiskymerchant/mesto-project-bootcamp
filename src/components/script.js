@@ -1,10 +1,13 @@
-import {loadNewCard} from './api.js'
+import {editUserIcon, getAllCards, getUserData, loadNewCard, profileInfoLoad} from './api.js'
 import '../pages/index.css'
-import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector} from './consts.js';
-import { openPopup, closePopup, toggleLike, handleFormSubmit, setEventListener } from "./util.js";
-import { runImagePopup } from "./modal.js";
-import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation } from "./validate.js";
-import {createCard, renderCard} from "./card.js";
+import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, formAvatar, profileAvatar, popupList, buttonEditSubmit} from './consts.js';
+import { closeByEsc, setButtonText } from "./util.js";
+import { openPopup, closePopup, runImagePopup } from "./modal.js";
+import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
+import {createCard, renderCard, toggleLike} from "./card.js";
+
+let userId = null;
+
 
 function addCardManually(e){
   e.preventDefault();
@@ -13,50 +16,113 @@ function addCardManually(e){
   manualCard.link = formAdd.querySelector('.form__profile_motto').value;
   console.log(manualCard)
   loadNewCard(manualCard)
-    .then(() => {
-      createCard(manualCard)
+    .then((data) => {
+      console.log(data)
+      createCard(data, userId)
     })
     .catch((error) => {
       console.log(`Cant load card ${error}`)
     })
   closePopup(formAdd);
+
 }
 
+function addAvatar(e){
+  e.preventDefault();
+  let newAvatar = null;
+  newAvatar = formAvatar.querySelector('.form__profile_motto').value;
+  editUserIcon(newAvatar)
+    .then (() => {
+      getUserData()
+      .then ((data) => {profileAvatar.src = data.avatar})
+    });
+  closePopup(formAvatar);
+  formAvatar.querySelector('.form__profile_motto').value = "";
+}
 
-//слушатель на кнопку редактирования профиля + открфтие формы редактирования + изменение инфы в шапке профиля
 buttonProfileInfoEdit.addEventListener('click',() => {
   nameInput.value = profileName.textContent.trim();
   jobInput.value = profileDescriptor.textContent.trim();
   openPopup(formEdit);
 });
 
-
-//слушатель на кнопку добавить фото + открытие формы добавления из темплейта + рендер картинки на страницу.
 addCardButton.addEventListener('click',(e) => {
   e.preventDefault(); 
   openPopup(formAdd);
   console.log(formAdd);
 });
 
+profileAvatar.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  openPopup(formAvatar);
+
+})
+
+formAvatar.querySelector('.form__save-button').addEventListener('click', addAvatar);
+
+
 formAdd.querySelector('.form__save-button').addEventListener('click', addCardManually);
-formEditCloseButton.addEventListener('click', () => closePopup(formEdit));
-addCardCloseButton.addEventListener('click', () => closePopup(formAdd));
-cardPopup.querySelector('.popup__close-icon').addEventListener('click', () => closePopup(cardPopup));
-
-document.addEventListener('keydown', function(evt){
-  if (evt.keyCode === 27) {
-    closePopup(formAdd);
-    closePopup(formEdit);
-    closePopup(cardPopup);
-  }
+formEditCloseButton.addEventListener('click', () => {
+  closePopup(formEdit)
 });
+addCardCloseButton.addEventListener('click', () => closePopup(formAdd));
 
-// document.addEventListener('click', function(evt) {
-//   if (!evt.target == formAdd.querySelector('.form__container')) {
-//     closePopup(formAdd);
-//     closePopup(formEdit);
-//     closePopup(cardPopup);
-//   }
-// });
+document.querySelectorAll('.form__close-icon').forEach(button => {
+  const buttonsPopup = button.closest('.popup'); 
+  button.addEventListener('click', () => closePopup(buttonsPopup));
+}); 
+
+function handleFormSubmit(evt){
+  evt.preventDefault();
+  setButtonText({
+    button: buttonEditSubmit, 
+    text: 'Сохраняем...',
+    disabled: true
+  })
+  let name = nameInput.value;
+  let about = jobInput.value;
+  console.log({name, about})
+  profileInfoLoad({name, about})
+    .then ((data) => {
+      profileName.textContent = data.name
+      profileDescriptor.textContent = data.about
+      console.log(data)
+    })
+    .then(() => {closePopup(formEdit)})
+    .catch((error) => console.log(error))
+    .finally(() => {
+      setButtonText({
+        button: buttonEditSubmit, 
+        text: 'Добавить',
+        disabled: false
+      })
+    })
+}; 
+  
+formEdit.addEventListener('submit', handleFormSubmit); 
+
 
 enableValidation(configSelector);
+
+popupList.forEach(popup => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup') ) {
+       closePopup(popup)
+    }
+  })
+}); 
+
+getUserData()
+  .then ((data) => {
+    userId = data._id;
+    profileName.textContent = data.name
+    profileDescriptor.textContent = data.about
+    profileAvatar.src = data.avatar;
+    getAllCards()
+      .then(data => {
+        data.forEach((dataItem) => createCard(dataItem, userId))
+      })
+  })
+  .catch(() => console.log('cant update profile info'))
+
+
