@@ -1,10 +1,10 @@
 import {editUserIcon, getAllCards, getUserData, loadNewCard, profileInfoLoad} from './api.js'
 import '../pages/index.css'
-import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, formAvatar, profileAvatar, popupList, buttonEditSubmit} from './consts.js';
+import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, formAvatar, profileAvatar, popupList, buttonEditSubmit, profileAvatarOverlay} from './consts.js';
 import { closeByEsc, setButtonText } from "./util.js";
 import { openPopup, closePopup, runImagePopup } from "./modal.js";
 import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
-import {createCard, renderCard, toggleLike} from "./card.js";
+import {createCard, toggleLike} from "./card.js";
 
 let userId = null;
 
@@ -18,7 +18,10 @@ function addCardManually(e){
   loadNewCard(manualCard)
     .then((data) => {
       console.log(data)
-      createCard(data, userId)
+      
+      renderCard(() => {
+        createCard(data, userId)
+      })
     })
     .catch((error) => {
       console.log(`Cant load card ${error}`)
@@ -52,14 +55,13 @@ addCardButton.addEventListener('click',(e) => {
   console.log(formAdd);
 });
 
-profileAvatar.addEventListener('click', (e) => {
+profileAvatarOverlay.addEventListener('click', (e) => {
   e.preventDefault(); 
   openPopup(formAvatar);
 
 })
 
 formAvatar.querySelector('.form__save-button').addEventListener('click', addAvatar);
-
 
 formAdd.querySelector('.form__save-button').addEventListener('click', addCardManually);
 formEditCloseButton.addEventListener('click', () => {

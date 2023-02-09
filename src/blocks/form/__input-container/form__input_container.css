@@ -1,0 +1,7 @@
+.form__input_container {
+  height: 63.8px;
+}
+
+.form__input_container:last-of-type {
+  margin-bottom: 17px;
+}

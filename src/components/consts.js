@@ -28,6 +28,7 @@ const initialCards = [
 const profileName = document.querySelector('.profile__info_header');
 const profileDescriptor = document.querySelector('.profile__info_description');
 const profileAvatar = document.querySelector('.profile__avatar-image');
+const profileAvatarOverlay = document.querySelector('.profile__avatar-overlay');
 const formEdit = document.querySelector('#popup-edit');
 const formAdd = document.querySelector('#popup-add');
 const formAvatar = document.querySelector('#popup-avatar')
@@ -82,5 +83,5 @@ export {
   profileAvatar,
   popupAny,
   popupList,
-  formAvatar
+  formAvatar, profileAvatarOverlay
 };

@@ -28,7 +28,11 @@ function toggleButtonState(buttonElement, isActive, config) {
 
 function checkInputValidity(inputElement, formElement, config) {
   const isInputValid = inputElement.validity.valid;
+  console.log(isInputValid);
+  console.log(`inputElement: ${inputElement.name}`);
+  console.log(formElement);
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+  console.log(errorElement);
   if (!isInputValid) {
     addError(inputElement, errorElement, config);
   }
@@ -39,6 +43,7 @@ function checkInputValidity(inputElement, formElement, config) {
 
 function enableValidation(config){
   const forms = document.querySelectorAll(config.formSelector);
+  console.log(forms)
 
   Array.from(forms).forEach((formElement) => {
     setEventListener(formElement, config);
@@ -51,6 +56,7 @@ function setEventListener(formElement, config){
 
   toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
 
+  console.log(inputList);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       toggleButtonState(submitButtonElement, formElement.checkValidity(), config);

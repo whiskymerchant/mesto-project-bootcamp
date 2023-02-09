@@ -1,9 +1,7 @@
-.form__validation-text-upper {
-  position: absolute;
+.form__validation-text {
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   color: #FF0000;
-  top: 115px;
 }

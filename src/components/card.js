@@ -35,6 +35,8 @@ function createCard(object, userId){
         console.log(error)
       })
   });
+  
+
   likeHeart.addEventListener('click', handleClickLike);
 
 

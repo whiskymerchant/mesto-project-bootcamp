@@ -1,0 +1,19 @@
+.profile__avatar-overlay {
+  background: none;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.profile__avatar-overlay:hover {
+  background: url(../../../images/pencil_avatar.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .8);
+}
+
+
