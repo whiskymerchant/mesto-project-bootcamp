@@ -44,15 +44,15 @@
   <div class="popup" id="popup-edit"> 
     <div class="form__container"> 
       <h2 class="form__heading">Редактировать профиль</h2> 
-      <img src="<%=require('./images/close_icon.svg')%>" alt="Крестик формы 1" class="form__close-icon" id="form-edit-close-icon">
+      <img src="<%=require('./images/close_icon.svg')%>" alt="Крестик формы 1" class="form__close-icon">
       <form action="" class="form" id="form-edit" novalidate>
         <div class="form__input_container">
           <input type="text" class="form__profile_name form__item" name="profile-name" placeholder="Имя" minlength="2" maxlength="40" required>
-          <span class="error form__validation-text" id="profile-name-error"></span>
+          <span class="form__validation-text" id="profile-name-error"></span>
         </div>
         <div class="form__input_container">
           <input type="text" class="form__profile_motto form__item" name="profile-motto" placeholder="О себе" minlength="2" maxlength="200" required>
-          <span class="error form__validation-text" id="profile-motto-error"></span>
+          <span class="form__validation-text" id="profile-motto-error"></span>
         </div>
         <button class="form__save-button form__button-blocked">Сохранить</button>
       </form>
@@ -66,11 +66,11 @@
       <form action="" class="form" id="form-add" type="submit" novalidate>
         <div class="form__input_container">
           <input type="text" class="form__profile_name form__item" name="place-name" placeholder="Название" minlength="2" maxlength="30" required>
-          <span class="error form__validation-text" id="place-name-error"></span>
+          <span class="form__validation-text" id="place-name-error"></span>
         </div>
         <div class="form__input_container">
           <input class="form__profile_motto form-link form__item" name="place-link" placeholder="Ссылка на картинку" type="url" required>
-          <span class="error form__validation-text" id="place-link-error"></span>
+          <span class="form__validation-text" id="place-link-error"></span>
         </div>
         <button class="form__save-button form__button-blocked" type="submit">Создать</button>
       </form>
@@ -84,7 +84,7 @@
       <form action="" class="form " id="form-avatar" type="submit" novalidate>
         <div class="form__input_container">
           <input class="form__profile_motto form-link form__item" name="avatar-link" placeholder="Ссылка на картинку" type="url" required>
-          <span class="error form__validation-text" id="avatar-link-error"></span>
+          <span class="form__validation-text" id="avatar-link-error"></span>
         </div>
         <button class="form__save-button form__button-blocked" type="submit">Создать</button>
       </form>
@@ -97,16 +97,16 @@
       <img src="" alt="" class="element__image">
       <div class="element__text-container">
         <h3 class="element__rectangle_text"></h3>
-        <div class="element__rectangle_heart" id="heart">
+        <div class="element__rectangle_heart">
           <p class="element__rectangle_like"></p>
         </div>
       </div>  
     </div>
   </template>
 
-  <div id="popup" class="popup__big-pic-template popup" id="popup__big-pic-template">
+  <div id="popup" class="popup__big-pic-template popup">
     <div class="popup__big-pic-container">
-      <img src="<%=require('./images/close_icon.svg')%>" alt="" class="popup__close-icon  form__close-icon">
+      <img src="<%=require('./images/close_icon.svg')%>" alt="" class="popup__close-icon form__close-icon">
       <img src="" alt="Картинка из галереи" class="popup__big-picture">
       <p class="popup__big-popup-descriptor"></p>
     </div>
