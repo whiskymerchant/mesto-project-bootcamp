@@ -1,4 +1,4 @@
-import { openPopup, closePopup, runImagePopup } from "./modal.js";
+import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
 import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector} from './consts.js';
 import { deleteCard, getAllCards, getUserData, loadNewCard, updateLike } from "./api.js";
@@ -9,7 +9,6 @@ import { toggleLike, isLiked } from "./util.js";
 
 function createCard(object, userId){
   
-  console.log(isLiked);
   const clonedCard = cardTemplate.content.querySelector('.element__rectangle').cloneNode(true);
   const pictureElement = clonedCard.querySelector('.element__image');
   clonedCard.querySelector('.element__rectangle_text').textContent = object.name;
@@ -45,7 +44,6 @@ function createCard(object, userId){
       .then((data) => {
         likeHeart.classList.toggle('element__rectangle_heart-on')
         object.likes = data.likes
-        console.log(data)
         clonedCard.querySelector('.element__rectangle_like').textContent = object.likes.length;
       })
       .catch((error) => console.log(error))
@@ -56,11 +54,18 @@ function createCard(object, userId){
   return clonedCard;
 };
 
+function runImagePopup(e){
+  openPopup(cardPopup);
+  const targetCard = e.target.closest('.element__rectangle');
+  const chosenImage = targetCard.querySelector('.element__image'); 
+  const chosenText = targetCard.querySelector('.element__rectangle_text');
+  cardPopup.querySelector('.popup__big-picture').src = chosenImage.src;
+  cardPopup.querySelector('.popup__big-popup-descriptor').textContent = chosenText.textContent;
+}
 
 
 
 
 
-
-export {createCard};
+export {createCard, runImagePopup};
 

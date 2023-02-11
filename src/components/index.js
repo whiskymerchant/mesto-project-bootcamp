@@ -2,9 +2,9 @@ import {editUserIcon, getAllCards, getUserData, loadNewCard, profileInfoLoad} fr
 import '../pages/index.css'
 import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, formAvatar, profileAvatar, popupList, buttonEditSubmit, profileAvatarOverlay} from './consts.js';
 import { closeByEsc, setButtonText } from "./util.js";
-import { openPopup, closePopup, runImagePopup } from "./modal.js";
+import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
-import {createCard, toggleLike} from "./card.js";
+import {createCard, toggleLike, runImagePopup} from "./card.js";
 
 let userId = null;
 
@@ -14,14 +14,11 @@ function addCardManually(e){
   const manualCard = {name: "", link: ""};
   manualCard.name = formAdd.querySelector('.form__profile_name').value;
   manualCard.link = formAdd.querySelector('.form__profile_motto').value;
-  console.log(manualCard)
   loadNewCard(manualCard)
     .then((data) => {
-      console.log(data)
-      
-      renderCard(() => {
-        createCard(data, userId)
-      })
+      createCard(data, userId)
+      formAdd.querySelector('.form__profile_name').value = "";
+      formAdd.querySelector('.form__profile_motto').value = "";
     })
     .catch((error) => {
       console.log(`Cant load card ${error}`)
@@ -52,7 +49,6 @@ buttonProfileInfoEdit.addEventListener('click',() => {
 addCardButton.addEventListener('click',(e) => {
   e.preventDefault(); 
   openPopup(formAdd);
-  console.log(formAdd);
 });
 
 profileAvatarOverlay.addEventListener('click', (e) => {
@@ -83,12 +79,10 @@ function handleFormSubmit(evt){
   })
   let name = nameInput.value;
   let about = jobInput.value;
-  console.log({name, about})
   profileInfoLoad({name, about})
     .then ((data) => {
       profileName.textContent = data.name
       profileDescriptor.textContent = data.about
-      console.log(data)
     })
     .then(() => {closePopup(formEdit)})
     .catch((error) => console.log(error))
