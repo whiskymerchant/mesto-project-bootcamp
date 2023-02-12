@@ -11,8 +11,10 @@ function createCard(object, userId){
   
   const clonedCard = cardTemplate.content.querySelector('.element__rectangle').cloneNode(true);
   const pictureElement = clonedCard.querySelector('.element__image');
+  const likesCount = clonedCard.querySelector('.element__rectangle_like');
+  console.log(likesCount);
   clonedCard.querySelector('.element__rectangle_text').textContent = object.name;
-  clonedCard.querySelector('.element__rectangle_like').textContent = object.likes.length;
+  likesCount.textContent = object.likes.length;
   pictureElement.src = object.link; 
   cardsContainer.prepend(clonedCard);
   const deleteBin = clonedCard.querySelector('.element__delete-button');
@@ -35,21 +37,17 @@ function createCard(object, userId){
       })
   });
   
-
   likeHeart.addEventListener('click', handleClickLike);
-
 
   function handleClickLike(){
     updateLike(object._id, isLiked(object.likes, userId))
       .then((data) => {
         likeHeart.classList.toggle('element__rectangle_heart-on')
         object.likes = data.likes
-        clonedCard.querySelector('.element__rectangle_like').textContent = object.likes.length;
+        likesCount.textContent = object.likes.length;
       })
       .catch((error) => console.log(error))
-  }
-
-
+  };
 
   return clonedCard;
 };

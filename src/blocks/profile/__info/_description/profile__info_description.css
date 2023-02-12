@@ -12,7 +12,6 @@
 
 @media (max-width: 700px) {
   .profile__info_decription {
-    text-align: center;
     margin: 0 auto;
     text-align: center;
   }

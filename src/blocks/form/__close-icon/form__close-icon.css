@@ -13,7 +13,7 @@
 
 @media (max-width: 580px) {
   .form__close-icon {
-    right: -20px;
-    top: -85px;
+    right: 0px;
+    top: -48px;
   }
 }
