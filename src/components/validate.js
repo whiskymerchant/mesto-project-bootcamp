@@ -1,7 +1,7 @@
 
 import { openPopup, closePopup } from "./modal.js";
 import { profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector} from './consts.js';
-import {addCardManually, createCard, toggleLike, runImagePopup} from "./card.js";
+import {addCardManually, createCard, toggleLike, runImagePopup, isLiked} from "./card.js";
 
 
 

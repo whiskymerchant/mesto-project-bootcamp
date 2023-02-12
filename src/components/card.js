@@ -2,7 +2,7 @@ import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
 import { profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector} from './consts.js';
 import { deleteCard, getAllCards, getUserData, loadNewCard, updateLike } from "./api.js";
-import { toggleLike, isLiked } from "./util.js";
+import { toggleLike } from "./util.js";
 
 
 
@@ -63,9 +63,11 @@ function runImagePopup(e){
   cardPopup.querySelector('.popup__big-popup-descriptor').textContent = chosenText.textContent;
 }
 
+function isLiked(likes, userID){
+  return likes.some(user => user._id === userID)
+}
 
 
 
-
-export {createCard, runImagePopup};
+export {createCard, runImagePopup, isLiked};
 

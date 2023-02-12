@@ -1,7 +1,7 @@
 
 import { profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, buttonAddSubmit, buttonEditSubmit} from './consts.js';
 import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
-import {addCardManually, createCard, toggleLike, runImagePopup} from "./card.js";
+import {addCardManually, createCard, toggleLike, runImagePopup, isLiked} from "./card.js";
 
 
 

@@ -4,7 +4,7 @@ import { profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput,
 import { closeByEsc, setButtonText } from "./util.js";
 import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
-import {createCard, toggleLike, runImagePopup} from "./card.js";
+import {createCard, toggleLike, runImagePopup, isLiked} from "./card.js";
 
 let userId = null;
 
@@ -69,12 +69,10 @@ profileAvatarOverlay.addEventListener('click', (e) => {
 
 })
 
-formAvatar.querySelector('.form__save-button').addEventListener('submit', addAvatar);
+formAvatar.addEventListener('submit', addAvatar);
 
-formAdd.querySelector('.form__save-button').addEventListener('click', addCardManually);
-// formEditCloseButton.addEventListener('click', () => {
-//   closePopup(formEdit)
-// });
+formAdd.addEventListener('submit', addCardManually);
+
 addCardCloseButton.addEventListener('click', () => closePopup(formAdd));
 
 document.querySelectorAll('.form__close-icon').forEach(button => {
@@ -82,15 +80,15 @@ document.querySelectorAll('.form__close-icon').forEach(button => {
   button.addEventListener('click', () => closePopup(buttonsPopup));
 }); 
 
-function handleFormSubmit(evt){
+function handleEditFormSubmit(evt){
   evt.preventDefault();
   setButtonText({
     button: buttonEditSubmit, 
     text: 'Сохраняем...',
     disabled: true
   })
-  let name = nameInput.value;
-  let about = jobInput.value;
+  const name = nameInput.value;
+  const about = jobInput.value;
   loadProfileInfo({name, about})
     .then ((data) => {
       profileName.textContent = data.name
@@ -107,7 +105,7 @@ function handleFormSubmit(evt){
     })
 }; 
   
-formEdit.addEventListener('submit', handleFormSubmit); 
+formEdit.addEventListener('submit', handleEditFormSubmit); 
 
 
 enableValidation(configSelector);
@@ -132,17 +130,5 @@ Promise.all([getUserData(), getAllCards()])
   .catch(() => console.log('cant update profile info'))
 
 
-// getUserData()
-//   .then ((data) => {
-//     userId = data._id;
-//     profileName.textContent = data.name
-//     profileDescriptor.textContent = data.about
-//     profileAvatar.src = data.avatar;
-//     getAllCards()
-//       .then(data => {
-//         data.forEach((dataItem) => createCard(dataItem, userId))
-//       })
-//   })
-//   .catch(() => console.log('cant update profile info'))
 
 
