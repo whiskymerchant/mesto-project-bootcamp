@@ -29,7 +29,7 @@ function getAllCards(){
     .then(dressResponse)
 }
 
-function profileInfoLoad(body) {
+function loadProfileInfo(body) {
   return fetch(`${config.url}/v1/${config.cohort}/users/me`, {
     method: "PATCH",
     headers: config.headers,
@@ -74,20 +74,4 @@ function updateLike(cardId, liked){
 }
 
 
-
-
-// loadNewCard({
-//   name: "Anton Plekhov",
-//   link: "https://pictures-of-cats.org/wp-content/uploads/2021/11/Spooky-Sphynx-in-womans-clothes-and-wig1_edited.jpg"
-// })
-
-// profileInfoLoad({
-//   name: 'Marie Skłodowska Curie',
-//   about: 'Physicist and Chemist'
-// })
-
-
-
-
-
-export { getUserData, dressResponse, getAllCards, profileInfoLoad, loadNewCard, editUserIcon, deleteCard, updateLike };
+export { getUserData, dressResponse, getAllCards, loadProfileInfo, loadNewCard, editUserIcon, deleteCard, updateLike };

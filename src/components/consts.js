@@ -1,29 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
 
 const profileName = document.querySelector('.profile__info_header');
 const profileDescriptor = document.querySelector('.profile__info_description');
@@ -31,7 +5,9 @@ const profileAvatar = document.querySelector('.profile__avatar-image');
 const profileAvatarOverlay = document.querySelector('.profile__avatar-overlay');
 const formEdit = document.querySelector('#popup-edit');
 const formAdd = document.querySelector('#popup-add');
-const formAvatar = document.querySelector('#popup-avatar')
+const formAvatar = document.querySelector('#popup-avatar');
+const formAddName = formAdd.querySelector('.form__profile_name');
+const formAddMotto = formAdd.querySelector('.form__profile_motto');
 const popupAny = document.querySelector('.popup');
 const popupList = document.querySelectorAll('.popup');
 const buttonEditSubmit = formEdit.querySelector('.form__save-button');
@@ -60,7 +36,6 @@ const configSelector = {
 };
 
 export {
-  initialCards, 
   profileName,
   profileDescriptor, 
   formEdit, 
@@ -83,5 +58,8 @@ export {
   profileAvatar,
   popupAny,
   popupList,
-  formAvatar, profileAvatarOverlay
+  formAvatar, 
+  profileAvatarOverlay,
+  formAddName,
+  formAddMotto
 };

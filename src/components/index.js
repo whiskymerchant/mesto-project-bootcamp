@@ -1,6 +1,6 @@
-import {editUserIcon, getAllCards, getUserData, loadNewCard, profileInfoLoad} from './api.js'
+import {editUserIcon, getAllCards, getUserData, loadNewCard, loadProfileInfo} from './api.js'
 import '../pages/index.css'
-import { initialCards, profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, formAvatar, profileAvatar, popupList, buttonEditSubmit, profileAvatarOverlay} from './consts.js';
+import { profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, formAvatar, profileAvatar, popupList, buttonEditSubmit, profileAvatarOverlay, formAddName, formAddMotto, buttonAddSubmit} from './consts.js';
 import { closeByEsc, setButtonText } from "./util.js";
 import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
@@ -11,19 +11,31 @@ let userId = null;
 
 function addCardManually(e){
   e.preventDefault();
+  setButtonText({
+    button: buttonAddSubmit, 
+    text: 'Сохраняем...',
+    disabled: true
+  })
   const manualCard = {name: "", link: ""};
-  manualCard.name = formAdd.querySelector('.form__profile_name').value;
-  manualCard.link = formAdd.querySelector('.form__profile_motto').value;
+  manualCard.name = formAddName.value;
+  manualCard.link = formAddMotto.value;
   loadNewCard(manualCard)
     .then((data) => {
       createCard(data, userId)
-      formAdd.querySelector('.form__profile_name').value = "";
-      formAdd.querySelector('.form__profile_motto').value = "";
+      formAddName.value = "";
+      formAddMotto.value = "";
+      closePopup(formAdd);
     })
     .catch((error) => {
       console.log(`Cant load card ${error}`)
     })
-  closePopup(formAdd);
+    .finally(() => {
+      setButtonText({
+        button: buttonAddSubmit, 
+        text: 'Добавить',
+        disabled: false
+      })
+    })
 
 }
 
@@ -32,11 +44,11 @@ function addAvatar(e){
   let newAvatar = null;
   newAvatar = formAvatar.querySelector('.form__profile_motto').value;
   editUserIcon(newAvatar)
-    .then (() => {
-      getUserData()
-      .then ((data) => {profileAvatar.src = data.avatar})
-    });
-  closePopup(formAvatar);
+    .then ((data) => {
+        profileAvatar.src = data.avatar
+        closePopup(formAvatar)
+      })
+    .catch((error) => console.log(error))
   formAvatar.querySelector('.form__profile_motto').value = "";
 }
 
@@ -57,12 +69,12 @@ profileAvatarOverlay.addEventListener('click', (e) => {
 
 })
 
-formAvatar.querySelector('.form__save-button').addEventListener('click', addAvatar);
+formAvatar.querySelector('.form__save-button').addEventListener('submit', addAvatar);
 
 formAdd.querySelector('.form__save-button').addEventListener('click', addCardManually);
-formEditCloseButton.addEventListener('click', () => {
-  closePopup(formEdit)
-});
+// formEditCloseButton.addEventListener('click', () => {
+//   closePopup(formEdit)
+// });
 addCardCloseButton.addEventListener('click', () => closePopup(formAdd));
 
 document.querySelectorAll('.form__close-icon').forEach(button => {
@@ -79,7 +91,7 @@ function handleFormSubmit(evt){
   })
   let name = nameInput.value;
   let about = jobInput.value;
-  profileInfoLoad({name, about})
+  loadProfileInfo({name, about})
     .then ((data) => {
       profileName.textContent = data.name
       profileDescriptor.textContent = data.about
@@ -108,17 +120,29 @@ popupList.forEach(popup => {
   })
 }); 
 
-getUserData()
-  .then ((data) => {
-    userId = data._id;
-    profileName.textContent = data.name
-    profileDescriptor.textContent = data.about
-    profileAvatar.src = data.avatar;
-    getAllCards()
-      .then(data => {
-        data.forEach((dataItem) => createCard(dataItem, userId))
-      })
+Promise.all([getUserData(), getAllCards()])
+  .then(([user, cards]) => {
+    userId = user._id;
+    profileName.textContent = user.name
+    profileDescriptor.textContent = user.about
+    profileAvatar.src = user.avatar;
+
+    cards.forEach((card) => createCard(card, userId))
   })
   .catch(() => console.log('cant update profile info'))
+
+
+// getUserData()
+//   .then ((data) => {
+//     userId = data._id;
+//     profileName.textContent = data.name
+//     profileDescriptor.textContent = data.about
+//     profileAvatar.src = data.avatar;
+//     getAllCards()
+//       .then(data => {
+//         data.forEach((dataItem) => createCard(dataItem, userId))
+//       })
+//   })
+//   .catch(() => console.log('cant update profile info'))
 
 
