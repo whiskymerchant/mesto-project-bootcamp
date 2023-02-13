@@ -8,6 +8,10 @@ import {createCard, toggleLike, runImagePopup, isLiked} from "./card.js";
 
 let userId = null;
 
+function renderCard(data, container) {
+  const newCard = createCard(data, userId);
+  container.prepend(newCard)
+}
 
 function addCardManually(e){
   e.preventDefault();
@@ -16,12 +20,10 @@ function addCardManually(e){
     text: 'Сохраняем...',
     disabled: true
   })
-  const manualCard = {name: "", link: ""};
-  manualCard.name = formAddName.value;
-  manualCard.link = formAddMotto.value;
+  const manualCard = {name: formAddName.value, link: formAddMotto.value};
   loadNewCard(manualCard)
     .then((data) => {
-      createCard(data, userId)
+      renderCard(data, cardsContainer);
       formAddName.value = "";
       formAddMotto.value = "";
       closePopup(formAdd);
@@ -125,7 +127,7 @@ Promise.all([getUserData(), getAllCards()])
     profileDescriptor.textContent = user.about
     profileAvatar.src = user.avatar;
 
-    cards.forEach((card) => createCard(card, userId))
+    cards.forEach((card) => renderCard(card, cardsContainer))
   })
   .catch(() => console.log('cant update profile info'))
 

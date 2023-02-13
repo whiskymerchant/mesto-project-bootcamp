@@ -16,14 +16,13 @@ function createCard(object, userId){
   clonedCard.querySelector('.element__rectangle_text').textContent = object.name;
   likesCount.textContent = object.likes.length;
   pictureElement.src = object.link; 
-  cardsContainer.prepend(clonedCard);
+  //cardsContainer.prepend(clonedCard);
   const deleteBin = clonedCard.querySelector('.element__delete-button');
   const likeHeart = clonedCard.querySelector('.element__rectangle_heart');
   pictureElement.addEventListener('click', runImagePopup)
   if(isLiked(object.likes, userId)){
     toggleLike(likeHeart)
   }
-
   if(object.owner._id !== userId){
     deleteBin.remove();
   }
