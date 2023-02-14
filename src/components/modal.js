@@ -1,4 +1,4 @@
-import { configSelector, buttonAddSubmit } from './consts.js';
+import { configSelector, buttonAddSubmit, buttonAvatarSubmit } from './consts.js';
 import { toggleButtonState } from "./validate.js";
 
 function openPopup(modalElement){
@@ -8,7 +8,6 @@ function openPopup(modalElement){
 
 function closePopup(modalElement){
   modalElement.classList.remove('popup_opened');
-  toggleButtonState(buttonAddSubmit, false, configSelector);
   document.removeEventListener('keydown', closeByEsc);
 };
 

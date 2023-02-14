@@ -50,6 +50,9 @@ function addCardManually(e){
       formAddName.value = "";
       formAddMotto.value = "";
     })
+    .then(() => {  
+      toggleButtonState(buttonAddSubmit, false, configSelector)
+    })
     .catch((error) => {
       console.log(`Cant load card ${error}`)
     })
@@ -75,12 +78,13 @@ function addAvatar(e){
         closePopup(formAvatar);
         newAvatarURL.value = "";
       })
+    .then (() => {toggleButtonState(buttonAvatarSubmit, false, configSelector)})
     .catch((error) => console.log(error))
     .finally(() => {
       setButtonText({
         button: buttonAvatarSubmit, 
         text: 'Добавить',
-        disabled: false
+        disabled: true
       })
     })
 }
@@ -92,12 +96,10 @@ buttonProfileInfoEdit.addEventListener('click',() => {
 });
 
 addCardButton.addEventListener('click',(e) => {
-  e.preventDefault(); 
   openPopup(formAdd);
 });
 
 profileAvatarOverlay.addEventListener('click', (e) => {
-  e.preventDefault(); 
   openPopup(formAvatar);
 
 })
