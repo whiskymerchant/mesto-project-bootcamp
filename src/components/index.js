@@ -46,6 +46,7 @@ function addCardManually(e){
   loadNewCard(manualCard)
     .then((data) => {
       renderCard(data, cardsContainer);
+      closePopup(formAdd);
       formAddName.value = "";
       formAddMotto.value = "";
     })
