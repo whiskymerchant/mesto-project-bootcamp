@@ -1,18 +1,13 @@
-import { openPopup, closePopup } from "./modal.js";
-import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
-import { profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector} from './consts.js';
-import { deleteCard, getAllCards, getUserData, loadNewCard, updateLike } from "./api.js";
+import { openPopup } from "./modal.js";
+import { cardTemplate, cardPopup } from './consts.js';
+import { deleteCard, updateLike } from "./api.js";
 import { toggleLike } from "./util.js";
-
-
-
 
 function createCard(object, userId){
   
   const clonedCard = cardTemplate.content.querySelector('.element__rectangle').cloneNode(true);
   const pictureElement = clonedCard.querySelector('.element__image');
   const likesCount = clonedCard.querySelector('.element__rectangle_like');
-  console.log(likesCount);
   clonedCard.querySelector('.element__rectangle_text').textContent = object.name;
   likesCount.textContent = object.likes.length;
   pictureElement.src = object.link; 

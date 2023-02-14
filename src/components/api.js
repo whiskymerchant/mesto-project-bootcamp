@@ -10,7 +10,7 @@ const config = {
 }
 
 function dressResponse(res) {
-  return res.ok ? res.json() : res.json().then((data) => Promise.reject(data));
+  return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 }
 
 function getUserData(){

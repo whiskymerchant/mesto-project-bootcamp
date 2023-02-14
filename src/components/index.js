@@ -1,10 +1,32 @@
-import {editUserIcon, getAllCards, getUserData, loadNewCard, loadProfileInfo} from './api.js'
+import { editUserIcon, getAllCards, getUserData, loadNewCard, loadProfileInfo } from './api.js'
 import '../pages/index.css'
-import { profileName, profileDescriptor, formEdit, formAdd, nameInput, jobInput, placeInput, linkInput, buttonProfileInfoEdit, formEditCloseButton, addCardButton, addCardCloseButton, cardTemplate, cardsContainer, allPage, cardPopup, configSelector, formAvatar, profileAvatar, popupList, buttonEditSubmit, profileAvatarOverlay, formAddName, formAddMotto, buttonAddSubmit} from './consts.js';
-import { closeByEsc, setButtonText } from "./util.js";
+import { 
+  profileName, 
+  profileDescriptor, 
+  formEdit, 
+  formAdd, 
+  nameInput, 
+  jobInput, 
+  buttonProfileInfoEdit, 
+  addCardButton, 
+  addCardCloseButton, 
+  cardsContainer, 
+  configSelector, 
+  formAvatar, 
+  profileAvatar, 
+  popupList, 
+  buttonEditSubmit, 
+  profileAvatarOverlay, 
+  formAddName, 
+  formAddMotto, 
+  buttonAddSubmit, 
+  buttonAvatarSubmit, 
+  newAvatarURL 
+} from './consts.js';
+import { setButtonText } from "./util.js";
 import { openPopup, closePopup } from "./modal.js";
-import { toggleButtonState, checkInputValidity, addError, hideError, enableValidation, setEventListener } from "./validate.js";
-import {createCard, toggleLike, runImagePopup, isLiked} from "./card.js";
+import { enableValidation } from "./validate.js";
+import { createCard } from "./card.js";
 
 let userId = null;
 
@@ -26,7 +48,6 @@ function addCardManually(e){
       renderCard(data, cardsContainer);
       formAddName.value = "";
       formAddMotto.value = "";
-      closePopup(formAdd);
     })
     .catch((error) => {
       console.log(`Cant load card ${error}`)
@@ -38,20 +59,29 @@ function addCardManually(e){
         disabled: false
       })
     })
-
-}
+};
 
 function addAvatar(e){
   e.preventDefault();
-  let newAvatar = null;
-  newAvatar = formAvatar.querySelector('.form__profile_motto').value;
-  editUserIcon(newAvatar)
+  setButtonText({
+    button: buttonAvatarSubmit, 
+    text: 'Сохраняем...',
+    disabled: true
+  });
+  editUserIcon(newAvatarURL.value)
     .then ((data) => {
         profileAvatar.src = data.avatar
-        closePopup(formAvatar)
+        closePopup(formAvatar);
+        newAvatarURL.value = "";
       })
     .catch((error) => console.log(error))
-  formAvatar.querySelector('.form__profile_motto').value = "";
+    .finally(() => {
+      setButtonText({
+        button: buttonAvatarSubmit, 
+        text: 'Добавить',
+        disabled: false
+      })
+    })
 }
 
 buttonProfileInfoEdit.addEventListener('click',() => {

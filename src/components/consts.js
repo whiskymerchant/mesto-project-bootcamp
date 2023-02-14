@@ -12,6 +12,7 @@ const popupAny = document.querySelector('.popup');
 const popupList = document.querySelectorAll('.popup');
 const buttonEditSubmit = formEdit.querySelector('.form__save-button');
 const buttonAddSubmit = formAdd.querySelector('.form__save-button');
+const buttonAvatarSubmit = formAvatar.querySelector('.form__save-button')
 const nameInput = formEdit.querySelector('.form__profile_name');
 const jobInput = formEdit.querySelector('.form__profile_motto');
 const placeInput = formAdd.querySelector('[name="place-name"]');
@@ -24,6 +25,8 @@ const cardTemplate = document.querySelector('#card-template');
 const cardsContainer = document.querySelector('.elements');
 const allPage = document.querySelector('.page');
 const cardPopup = document.querySelector('.popup__big-pic-template');
+const newAvatarURL = formAvatar.querySelector('.form__profile_motto');
+
 
 
 
@@ -61,5 +64,7 @@ export {
   formAvatar, 
   profileAvatarOverlay,
   formAddName,
-  formAddMotto
+  formAddMotto,
+  buttonAvatarSubmit,
+  newAvatarURL
 };
