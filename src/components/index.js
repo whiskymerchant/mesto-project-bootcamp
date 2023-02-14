@@ -25,7 +25,7 @@ import {
 } from './consts.js';
 import { setButtonText } from "./util.js";
 import { openPopup, closePopup } from "./modal.js";
-import { enableValidation } from "./validate.js";
+import { enableValidation, toggleButtonState } from "./validate.js";
 import { createCard } from "./card.js";
 
 let userId = null;
