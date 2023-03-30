@@ -28,4 +28,4 @@ WebPack оптимизирует картинки даже лучше.
 
 “There is no queue at the gate of Patience.”
  
-И на всякий случай открытая ссылка на GitHub Pages: https://whiskymerchant.github.io/mesto-project-bootcamp/
+И на всякий случай открытая ссылка на GitHub Pages: https://whiskymerchant.github.io/mesto-project-bootcamp/ .
