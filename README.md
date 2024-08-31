@@ -1,31 +1,22 @@
-# Проект: Место
+### Overview
+This project is written from the perspective of the world's most traveled cat, Scott. He is not just a cat but a peacemaker cat. Bebeur (see Louis-Ferdinand Céline) at the end of 2022. In the countries that endure his presence, he brings bitterness, depression, and the dove of peace. Scott has already traveled from St. Petersburg to Moscow, Rostov, and Krasnodar. He crossed the Black Sea on an Intex inflatable mattress, traveled from Istanbul to Smyrna, boarded a ferry to Lesbos, where he has decided to stay for a couple of weeks. Praise be to Allah, cats are loved on the Aegean islands (see the legend of the cat Muizza).
 
-### Обзор
+### Technologies Used
 
-Данный [проект](https://whiskymerchant.github.io/mesto-project-bootcamp/) написан от лица самого путешествующего в мире кота, Скота. Это не просто кот, а кот-миротворец. Бебер (см. Луи-Фердинанда Селина) конца 2022 года. 
-По странам, терпящим его присутствие, он несет желчь, депрессию и голубя мира. Скот уже прошел из Санкт-Петербурга в Москву, Ростов, Краснодар. Переплыл 
-Черное Море на надувном матрасе Intex, прошел из Стамбула в Смирну, сел на паром до Лесбоса, где пока решил остаться на пару недель. Хвала Аллаху, на островах
-Эгейского моря любят котов (см. легенду о кошке Муиззе). 
+HTML (incl. Grid and Adaptive Layout), CSS, JavaScript
+GitHub
+GitHub Pages
+VS Code as the IDE
+API
+and finally WebPack!
+Images
 
-**Используемые технологии**
+All images were supposed to be optimized with Squoosh: both Scott and I like it very much. However, it turned out that WebPack optimizes images even better.
 
-* HTML (incl. Grid and Adaptive Layout), CSS, JavaScript
-* GitHub
-* GitHub Pages
-* VS Code as the IDE
-* API
-* and finally WebPack!
+### Thoughts
 
-**Картинки**
-
-Все картинки по плану должны были быть[оптимизированы Сквушем](https://squoosh.app): мне и Скоту он очень нравится. Но оказалось, что
-WebPack оптимизирует картинки даже лучше. 
-
-**Мысли вслух**
-
-Скот опасается, что если его хозяин сделает одно неверное движение в Гите, все упадет. И хозяин вряд ли сможет восстановить все
-по памяти. Если вообще сможет восстановить. 
+Scott is worried that if his owner makes one wrong move in Git, everything will collapse. And the owner will likely not be able to restore everything from memory. If it can be restored at all.
 
 “There is no queue at the gate of Patience.”
- 
-И на всякий случай открытая ссылка на GitHub Pages: https://whiskymerchant.github.io/mesto-project-bootcamp/ .
+
+And just in case, here's the open link to GitHub Pages: https://whiskymerchant.github.io/mesto-project-bootcamp/.
